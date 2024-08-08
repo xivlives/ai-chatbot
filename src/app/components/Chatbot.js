@@ -17,7 +17,8 @@ export default function Chatbot() {
     const [isLoading, setIsLoading] = useState(false)
     const messagesEndRef = useRef(null)
     const [user, setUser] = useState(null)
-
+    
+    // set messages if there are any for the specific user from the database if not set the default chatbot greeting 
     useEffect(() => {
         const unsubscribeAuth = onAuthStateChanged(auth, async (user) => {
             if (user) {
@@ -48,18 +49,23 @@ export default function Chatbot() {
         return () => unsubscribeAuth();
     }, []);
 
+    // formats messages sent and received
     const formatMessageContent = (content) => {
         // Replace line breaks with <br />
         let formattedContent = content.replace(/\n+/g, "<br />");
-
-        // Replace bullet points with <ul><li>
-        formattedContent = formattedContent.replace(/\*\s\*\*(.*?)\*\*/g, "<li><strong>$1</strong></li>");
-
-        // Wrap bullet points with <ul>
-        formattedContent = formattedContent.replace(/<li>/g, "<ul><li>").replace(/<\/li>/g, "</li></ul>");
-
+    
+        // Replace bullet points (starting with "* " or "- ") with <li> elements
+        formattedContent = formattedContent.replace(/^\s*[\*\-\.]\s+(.*)/gm, "<li>$1</li>");
+    
+        // Wrap all <li> elements with a single <ul>
+        formattedContent = formattedContent.replace(/(<li>.*<\/li>)/gms, "<ul>$1</ul>");
+    
+        // Ensure that multiple lists are properly handled (merging consecutive <ul>s)
+        formattedContent = formattedContent.replace(/<\/ul>\s*<ul>/g, "");
+    
         return formattedContent;
     };
+    
 
     const sendMessage = async () => {
         if (!message.trim() || !user) return;
