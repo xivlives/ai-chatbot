@@ -149,8 +149,8 @@ export default function Chatbot() {
 
     return (
         <Box
-            width="100vw"
-            height="100vh"
+            width="fit"
+            height="fit"
             display="flex"
             flexDirection="column"
             justifyContent="center"

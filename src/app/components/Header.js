@@ -31,9 +31,9 @@ const Header = () => {
       }
     }>
       <Container maxWidth="md">
-        <Toolbar disableGutters>
+        <Toolbar className='flex justify-between' disableGutters>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Customer Support Chatbot
+            STORE
           </Typography>
           {user ? (
             <Button color="inherit" component={Link} href="/login" onClick={handleLogout}>
