@@ -1,6 +1,7 @@
 'use client'
 
-import { Box, Button, Stack, TextField } from '@mui/material'
+import { Box, Button, Stack, TextField, IconButton } from '@mui/material'
+import ArrowUpwardRounded from '@mui/icons-material/ArrowUpwardRounded'
 import { useState, useRef, useEffect } from 'react'
 import { auth, firestore } from '../../firebase'
 import { collection, addDoc, query, orderBy, onSnapshot } from 'firebase/firestore'
@@ -154,7 +155,7 @@ export default function Chatbot() {
             flexDirection="column"
             justifyContent="center"
             alignItems="center"
-            bgcolor="white"
+            bgcolor="#616161"
         >
             <Stack
                 direction={'column'}
@@ -164,6 +165,7 @@ export default function Chatbot() {
                 borderRadius={2}
                 p={2}
                 spacing={3}
+                bgcolor={'white'}
             >
                 <Stack
                     direction={'column'}
@@ -183,11 +185,15 @@ export default function Chatbot() {
                             <Box
                                 bgcolor={
                                     msg.role === 'assistant'
-                                        ? 'primary.main'
-                                        : 'secondary.main'
+                                        ? '#b2dfdb'
+                                        : '#00695c'
                                 }
-                                color="white"
-                                borderRadius={16}
+                                color={
+                                    msg.role === 'assistant'
+                                    ?"black"
+                                    :"white"
+                                }
+                                borderRadius={3}
                                 p={3}
                                 dangerouslySetInnerHTML={{ __html: msg.content }}
                             />
@@ -205,13 +211,23 @@ export default function Chatbot() {
                         onKeyPress={handleKeyPress}
                         disabled={isLoading}
                     />
-                    <Button
+                    <IconButton
+                        style={
+                            {
+                                backgroundColor:"#00695c",
+                                color: "white",
+                                fontSize: "1rem",
+                                borderRadius: "15px",
+                                padding: 15 
+                            }
+                        }
                         variant="contained"
                         onClick={sendMessage}
                         disabled={isLoading}
                     >
-                        {isLoading ? 'Sending...' : 'Send'}
-                    </Button>
+                        {isLoading ? 'Sending...' : ''}
+                        <ArrowUpwardRounded/>
+                    </IconButton>
                 </Stack>
             </Stack>
         </Box>

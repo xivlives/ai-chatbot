@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { AppBar, Toolbar, Container, Button, Typography } from '@mui/material';
+import { AppBar, Toolbar, Container, Button, Typography, IconButton } from '@mui/material';
 import { auth } from '../../firebase'; 
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import CustomAlert from './CustomAlert';
@@ -23,7 +23,13 @@ const Header = () => {
 
   return (
     <>
-    <AppBar position="static">
+    <AppBar position="sticky" style={
+      {
+        backgroundColor: "#26a69a",
+        color: "black",
+        boxShadow: "0px 0px 0px 0px"
+      }
+    }>
       <Container maxWidth="md">
         <Toolbar disableGutters>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
