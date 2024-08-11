@@ -58,7 +58,7 @@ export default function Chatbot() {
         // Process each line to handle line breaks, bullet points, and lists
         const formattedLines = lines.map((line) => {
           // Handle bullet points
-          if (line.trim().startsWith('*') || line.trim().startsWith('-') || line.trim().startsWith('.') || line.trim().startsWith('"') || line.trim().startsWith('\n\n') || line.trim().endsWith('\n')) {
+          if (line.trim().startsWith('*') || line.trim().startsWith('-') || line.trim().startsWith('.') || line.trim().endsWith('\n')) {
             return `<li>${line.trim().substring(2)}</li>`;
           }
       
