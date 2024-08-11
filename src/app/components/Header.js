@@ -32,8 +32,8 @@ const Header = () => {
     }>
       <Container maxWidth="md">
         <Toolbar className='flex justify-between' disableGutters>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            STORE
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1, fontWeight: "bold" }}>
+            SHOPEASE
           </Typography>
           {user ? (
             <Button color="inherit" component={Link} href="/login" onClick={handleLogout}>

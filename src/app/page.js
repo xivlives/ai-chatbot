@@ -9,6 +9,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Login from "./components/Login";
 import Chatbot from "./components/Chatbot";
+import HomePageBody from "./components/body";
 
 export default function Home() {
   const [user, setUser] = useState(null);
@@ -66,6 +67,9 @@ export default function Home() {
           <span>have a question?</span>
           <Chat />
         </Fab>
+
+        {/* body component */}
+        <HomePageBody />
 
         {/* Dialog for Chatbot */}
         <Dialog

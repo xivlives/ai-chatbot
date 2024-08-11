@@ -50,22 +50,46 @@ export default function Chatbot() {
         return () => unsubscribeAuth();
     }, []);
 
-    // formats messages sent and received
+    // formats messages better
     const formatMessageContent = (content) => {
-        // Replace line breaks with <br />
-        let formattedContent = content.replace(/\n+/g, "<br />");
-    
-        // Replace bullet points (starting with "* " or "- ") with <li> elements
-        formattedContent = formattedContent.replace(/^\s*[\*\-\.]\s+(.*)/gm, "<li>$1</li>");
-    
-        // Wrap all <li> elements with a single <ul>
-        formattedContent = formattedContent.replace(/(<li>.*<\/li>)/gms, "<ul>$1</ul>");
-    
-        // Ensure that multiple lists are properly handled (merging consecutive <ul>s)
-        formattedContent = formattedContent.replace(/<\/ul>\s*<ul>/g, "");
-    
+        // Split the content into lines
+        const lines = content.split('\n');
+      
+        // Process each line to handle line breaks, bullet points, and lists
+        const formattedLines = lines.map((line) => {
+          // Handle bullet points
+          if (line.trim().startsWith('*') || line.trim().startsWith('-') || line.trim().startsWith('.') || line.trim().startsWith('"') || line.trim().startsWith('\n\n') || line.trim().endsWith('\n')) {
+            return `<li>${line.trim().substring(2)}</li>`;
+          }
+      
+          // Handle line breaks
+          return `<p>${line}</p>`;
+        });
+      
+        // Wrap consecutive <li> elements in <ul>
+        let formattedContent = '';
+        let inList = false;
+        formattedLines.forEach((line) => {
+          if (line.startsWith('<li>')) {
+            if (!inList) {
+              formattedContent += '<ul>';
+              inList = true;
+            }
+            formattedContent += line;
+          } else {
+            if (inList) {
+              formattedContent += '</ul>';
+              inList = false;
+            }
+            formattedContent += line;
+          }
+        });
+        if (inList) {
+          formattedContent += '</ul>';
+        }
+      
         return formattedContent;
-    };
+      };
     
 
     const sendMessage = async () => {
