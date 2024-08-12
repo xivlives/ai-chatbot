@@ -12,7 +12,7 @@ function HomePageBody() {
           <Typography variant="h2" component="h1" gutterBottom>
             Discover Your Style
           </Typography>
-          <Button variant="contained" style={{backgroundColor: "#26a69a"}}>
+          <Button variant="contained" style={{backgroundColor: "#26a69a", padding:15}}>
             Shop Now
           </Button>
         </Box>

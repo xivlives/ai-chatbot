@@ -20,7 +20,7 @@ const Footer = () => {
     >
       <Container maxWidth="md">
         <Typography variant="body2" color="text.secondary" align="center">
-          © 2024 Chatbot System
+          © 2024 SHOPEASE
         </Typography>
       </Container>
     </Box>
